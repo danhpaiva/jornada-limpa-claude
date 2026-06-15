@@ -1,0 +1,41 @@
+# Nome do fluxo de trabalho
+name: Deploy GitHub Pages
+
+# Quando o fluxo deve ser executado
+on:
+  push:
+    branches:
+      - main
+      - master
+
+# Adicione o bloco de permissões aqui para permitir que o token GITHUB_TOKEN funcione.
+permissions:
+  contents: read # Permissão padrão para checkout de código
+  pages: write   # Permite que a Ação publique no GitHub Pages
+  id-token: write # ESSENCIAL: Permite que a Ação solicite o OIDC ID Token
+
+# Os jobs (tarefas) a serem executados
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. Checkout: Clona o repositório
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    # 2. Setup Pages: Configura o ambiente para publicação no GitHub Pages
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    # 3. Upload Artifact: Empacota e carrega os arquivos do seu site
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        # Caminho da sua pasta 'jornada'
+        path: 'jornada' 
+        
+    # 4. Deploy: Publica o artefato (os arquivos) no GitHub Pages
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
