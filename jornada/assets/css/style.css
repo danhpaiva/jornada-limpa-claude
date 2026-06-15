@@ -1,73 +1,271 @@
+/* ─── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-bg:          #0d0f14;
+  --color-surface:     #141720;
+  --color-surface-2:   #1c2030;
+  --color-border:      rgba(255,255,255,.07);
+  --color-accent:      #7c6af7;
+  --color-accent-2:    #5eead4;
+  --color-text:        #e8eaf0;
+  --color-text-muted:  #6b7280;
+  --color-success:     #34d399;
+  --color-ring-track:  rgba(255,255,255,.06);
+
+  --font:              'Inter', system-ui, sans-serif;
+  --radius-card:       24px;
+  --radius-sm:         10px;
+  --shadow-card:       0 32px 80px rgba(0,0,0,.6), 0 0 0 1px var(--color-border);
+  --transition:        .25s cubic-bezier(.4,0,.2,1);
+}
+
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f7f6;
-  /* Fundo suave */
-  color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-text);
   min-height: 100vh;
-  margin: 0;
-  text-align: center;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  overflow-x: hidden;
 }
 
-.container {
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 90%;
+/* ─── Background Glow ───────────────────────────────────────── */
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(124,106,247,.15) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(94,234,212,.10) 0%, transparent 70%);
 }
 
-h1 {
-  color: #007bff;
-  /* Azul para destaque */
-  margin-bottom: 20px;
+/* ─── Card ──────────────────────────────────────────────────── */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp .5s ease both;
 }
 
-.data-inicio {
-  font-style: italic;
-  color: #666;
-  margin-bottom: 30px;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.contador {
-  background-color: #28a745;
-  /* Verde para vitória */
-  color: white;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-}
+/* ─── Header ────────────────────────────────────────────────── */
+.card__header { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 
-#dias-limpos {
-  display: block;
-  font-size: 3em;
-  font-weight: bold;
-}
-
-.contador p {
-  margin: 5px 0 0;
-  font-size: 1.2em;
-}
-
-.mensagem-criativa {
-  min-height: 60px;
-  /* Garante espaço para a mensagem */
-  margin-bottom: 30px;
-}
-
-#mensagem {
-  font-size: 1.1em;
-  color: #dc3545;
-  /* Vermelho para a ênfase da mensagem */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .72rem;
   font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: rgba(124,106,247,.12);
+  border: 1px solid rgba(124,106,247,.25);
+  border-radius: 100px;
+  padding: 5px 14px;
 }
 
-.slogan {
-  font-size: 0.9em;
-  color: #999;
-  border-top: 1px dashed #ccc;
-  padding-top: 15px;
+.card__date {
+  font-size: .85rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+/* ─── Ring Counter ──────────────────────────────────────────── */
+.counter-ring {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ring__track {
+  stroke: var(--color-ring-track);
+  stroke-width: 10;
+}
+
+.ring__progress {
+  stroke: url(#ringGradient);
+  stroke-width: 10;
+  transition: stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);
+  filter: drop-shadow(0 0 8px rgba(124,106,247,.6));
+}
+
+.counter-ring__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.counter__number {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, #a78bfa, #5eead4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
+  transition: var(--transition);
+}
+
+.counter__label {
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* SVG gradient def */
+.ring svg defs { overflow: visible; }
+
+/* ─── Message Box ───────────────────────────────────────────── */
+.message-box {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-box__text {
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeIn .6s ease .3s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Milestones ────────────────────────────────────────────── */
+.milestones__title {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.milestones__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.milestone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  transition: var(--transition);
+}
+
+.milestone--achieved {
+  border-color: rgba(52,211,153,.3);
+  background: rgba(52,211,153,.06);
+}
+
+.milestone__icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255,255,255,.05);
+}
+
+.milestone--achieved .milestone__icon {
+  background: rgba(52,211,153,.15);
+}
+
+.milestone__info { flex: 1; min-width: 0; }
+
+.milestone__name {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.milestone--achieved .milestone__name { color: var(--color-success); }
+
+.milestone__sub {
+  font-size: .72rem;
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+
+.milestone__check {
+  font-size: .85rem;
+  color: var(--color-success);
+  flex-shrink: 0;
+}
+
+/* ─── Footer ────────────────────────────────────────────────── */
+.card__footer {
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+}
+
+.card__slogan {
+  font-size: .82rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ─── Responsive ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .card { padding: 28px 20px; }
+  .counter__number { font-size: 2.8rem; }
 }
