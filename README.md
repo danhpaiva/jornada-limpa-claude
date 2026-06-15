@@ -55,13 +55,18 @@ jornada-limpa-claude/
 
 ## Deploy
 
-O deploy acontece automaticamente a cada push em `main` ou `master`:
+O deploy acontece automaticamente a cada push em `main`, `master` ou `develop`.
 
 ```bash
-git push origin main
+git push origin develop
 ```
 
 O workflow em `.github/workflows/static.yml` empacota o conteúdo de `jornada/` e publica via OIDC no GitHub Pages. Nenhum step de build necessário.
+
+> **⚠️ Configuração obrigatória (uma vez só)**
+> O GitHub Pages precisa estar apontado para o workflow, não para um branch. Sem isso, o Jekyll renderiza o `README.md` como homepage em vez do app.
+>
+> **Settings → Pages → Build and deployment → Source → GitHub Actions**
 
 ## Desenvolvimento local
 
