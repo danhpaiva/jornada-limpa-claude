@@ -1,0 +1,73 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7f6;
+  /* Fundo suave */
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  text-align: center;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+}
+
+h1 {
+  color: #007bff;
+  /* Azul para destaque */
+  margin-bottom: 20px;
+}
+
+.data-inicio {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.contador {
+  background-color: #28a745;
+  /* Verde para vitória */
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+#dias-limpos {
+  display: block;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.contador p {
+  margin: 5px 0 0;
+  font-size: 1.2em;
+}
+
+.mensagem-criativa {
+  min-height: 60px;
+  /* Garante espaço para a mensagem */
+  margin-bottom: 30px;
+}
+
+#mensagem {
+  font-size: 1.1em;
+  color: #dc3545;
+  /* Vermelho para a ênfase da mensagem */
+  font-weight: 600;
+}
+
+.slogan {
+  font-size: 0.9em;
+  color: #999;
+  border-top: 1px dashed #ccc;
+  padding-top: 15px;
+}
