@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const DATA_INICIO = new Date('2026-06-15T00:00:00');
+  const DATA_INICIO = new Date('2026-06-17T00:00:00');
 
-  const elDias    = document.getElementById('dias-limpos');
+  const elDias = document.getElementById('dias-limpos');
   const elMensagem = document.getElementById('mensagem');
-  const elRing    = document.getElementById('ring-progress');
+  const elRing = document.getElementById('ring-progress');
   const elMilestones = document.getElementById('milestones-list');
 
   // ── SVG gradient ────────────────────────────────────────────
@@ -19,23 +19,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Milestones config ────────────────────────────────────────
   const MILESTONES = [
-    { dias: 1,   icon: '🌅', label: '1º Dia',       desc: 'Primeiro passo dado'           },
-    { dias: 7,   icon: '🌱', label: '1 Semana',      desc: 'Sete dias de força'            },
-    { dias: 30,  icon: '🌿', label: '1 Mês',         desc: 'Um ciclo completo'             },
-    { dias: 90,  icon: '🔥', label: '3 Meses',       desc: 'Novo hábito consolidado'       },
-    { dias: 180, icon: '⚡', label: '6 Meses',       desc: 'Meio ano de liberdade'         },
-    { dias: 365, icon: '✨', label: '1 Ano',         desc: 'Um ano de renascimento'        },
+    { dias: 1, icon: '🌅', label: '1º Dia', desc: 'Primeiro passo dado' },
+    { dias: 7, icon: '🌱', label: '1 Semana', desc: 'Sete dias de força' },
+    { dias: 30, icon: '🌿', label: '1 Mês', desc: 'Um ciclo completo' },
+    { dias: 90, icon: '🔥', label: '3 Meses', desc: 'Novo hábito consolidado' },
+    { dias: 180, icon: '⚡', label: '6 Meses', desc: 'Meio ano de liberdade' },
+    { dias: 365, icon: '✨', label: '1 Ano', desc: 'Um ano de renascimento' },
   ];
 
   // ── Mensagens por faixa ──────────────────────────────────────
   function getMensagem(dias) {
-    if (dias === 0)              return 'O hoje já é uma vitória. Cada hora conta.';
-    if (dias === 1)              return 'Primeiro Sol! Um dia incrível de renovação.';
-    if (dias <= 7)               return `Semana de Descoberta — cada ${dias}º dia é um passo gigantesco.`;
-    if (dias <= 30)              return `Força e Coragem! Você está construindo uma nova fundação. ${dias} dias de superação.`;
-    if (dias <= 90)              return `Novo Ciclo — ${dias} dias de liberdade são um presente enorme.`;
-    if (dias <= 180)             return `Voando Alto! Seu futuro está mais leve e claro. ${dias} dias de resiliência.`;
-    if (dias <= 364)             return `Quase um Ano — ${dias} dias de pura força. O espelho reflete a melhor versão de você.`;
+    if (dias === 0) return 'O hoje já é uma vitória. Cada hora conta.';
+    if (dias === 1) return 'Primeiro Sol! Um dia incrível de renovação.';
+    if (dias <= 7) return `Semana de Descoberta — cada ${dias}º dia é um passo gigantesco.`;
+    if (dias <= 30) return `Força e Coragem! Você está construindo uma nova fundação. ${dias} dias de superação.`;
+    if (dias <= 90) return `Novo Ciclo — ${dias} dias de liberdade são um presente enorme.`;
+    if (dias <= 180) return `Voando Alto! Seu futuro está mais leve e claro. ${dias} dias de resiliência.`;
+    if (dias <= 364) return `Quase um Ano — ${dias} dias de pura força. O espelho reflete a melhor versão de você.`;
     const anos = Math.floor(dias / 365);
     return `${dias} dias — ${anos} ${anos > 1 ? 'Anos' : 'Ano'} de Milagre! Seu renascimento inspira o mundo.`;
   }
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Próximos 3 não atingidos + todos os atingidos (últimos 2)
     const atingidos = MILESTONES.filter(m => diasAtuais >= m.dias);
-    const proximos  = MILESTONES.filter(m => diasAtuais < m.dias).slice(0, 3);
+    const proximos = MILESTONES.filter(m => diasAtuais < m.dias).slice(0, 3);
 
     const mostrar = [...atingidos.slice(-2), ...proximos];
 
@@ -88,8 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function animarContador(alvo) {
     const duracao = 1000;
-    const inicio  = performance.now();
-    const de      = 0;
+    const inicio = performance.now();
+    const de = 0;
 
     function step(agora) {
       const t = Math.min((agora - inicio) / duracao, 1);
