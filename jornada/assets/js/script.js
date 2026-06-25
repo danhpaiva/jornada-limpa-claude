@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const DATA_INICIO = new Date('2026-06-24T00:00:00');
+  const DATA_INICIO = new Date('2026-06-25T00:00:00');
 
   const elDias = document.getElementById('dias-limpos');
   const elMensagem = document.getElementById('mensagem');
